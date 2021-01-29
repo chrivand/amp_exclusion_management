@@ -3,12 +3,14 @@
 
 # Cisco Secure Endpoint (formerly known as AMP for Endpoints) Exclusion Migration Tool
 
+> **NOTE:** This is sample code and needs to be tested properly before using in production!
+
 ## Features
 
 * Prompts user wether all policies should be downloaded/updated. This will download all the XML files from the AMP cloud and creates a new directory `policies` to store them all.
 * Prompts user which XML file should be used to parse the exclusions out of.
 * Prints the parsed exclusions on the CLI and also creates a directory `exclusions` with a TXT file.
-* Parsed exclusions can be used to migrate exclusions from policy to policy, and more importantly from tenant to tenant (in the MSSP multi-org portal).
+* Parsed exclusions can be used to migrate exclusions from policy to policy, and more importantly, from tenant to tenant (in the MSSP multi-org portal).
 
 ### Roadmap
 
@@ -47,7 +49,7 @@ python AMP_exclusion_management.py
 
 8. Copy the parsed exclusions from the CLI or from the created directory `exclusions` with a TXT file.
 
-9. Go to your AMP tenant that you wish to migrate exclusions into. Go to an existing **custom exclusion set** or create a new one. Click on **Add Multiple Exclusions...** and paste the copied exclusions. They should be auto-detected as the exclusion type. Please check out the [AMP for Endpoints User Guide](https://docs.amp.cisco.com/en/A4E/AMP%20for%20Endpoints%20User%20Guide.pdf) for more information.
+9. Go to your AMP tenant that you wish to migrate exclusions into. Go to an existing **custom exclusion set** or create a new one. Click on **Add Multiple Exclusions...** and paste the copied exclusions. They should be auto-detected as the exclusion type (**please check this the first time you are migrating exclusions to a tenant**). Please check out the [AMP for Endpoints User Guide](https://docs.amp.cisco.com/en/A4E/AMP%20for%20Endpoints%20User%20Guide.pdf) for more information.
 
 10. Repeat steps 5 until 9 as many times as you would like. Most likely you will select `no` on the first prompt, since you don't have to download each XML file again each time. You can parse exclusions out of any policy XML file you would like.
 
