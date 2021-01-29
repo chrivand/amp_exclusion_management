@@ -1,0 +1,5 @@
+{
+    "amp_client_id": "<insert-amp-client-id>",
+    "amp_api_key": "<insert-amp-api-key>",
+    "amp_host": "api.amp.cisco.com"
+}
