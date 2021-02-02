@@ -118,29 +118,72 @@ def XML_parser(XML_file_name):
     if not os.path.exists(f'{output_path}'):
         os.makedirs(f'{output_path}')
     
-    # create text file
-    TXT_file = open(f"exclusions/{XML_file_name[:-4]}.txt", "w+")
+    # create text file without exclusion type for copy pasting
+    TXT_file_copy = open(f"exclusions/{XML_file_name[:-4]}_for_copying.txt", "w+")
+
+    # create text file with exclusion type for checking
+    TXT_file_check = open(f"exclusions/{XML_file_name[:-4]}_for_checking.txt", "w+")
 
     for info_items in tree.iter('{http://www.w3.org/2000/09/xmldsig#}info'):
         for item in info_items:
             # removing the piped flags up front
-            # for future reference: 1 = Object is a threat detection name 2 = object is a folder path 3 = object is a file extention 4 = object is a file name 5 = object is a process 6 = object is a regular expression
             str_item = str(item.text)
-            split_item = str_item[10:]
-            exclusion_list.append(split_item)
+            split_item = str_item.split("|")
+            # check if all items were found, otherwise skip item
+            if len(split_item) != 5:
+                continue
+            
+            # add to list
+            exclusion_list.append(split_item[4])
             
             # write to file
-            TXT_file.write(f"{split_item}\n")
+            TXT_file_copy.write(f"{split_item[4]}\n")
+
+            # write to file with exclusion type for checking
+            if split_item[1] == "1":
+                TXT_file_check.write(f"Threat - {split_item[4]}\n")
+            elif split_item[1] == "2":
+                TXT_file_check.write(f"Path - {split_item[4]}\n")
+            elif split_item[1] == "3":
+                TXT_file_check.write(f"File Extension - {split_item[4]}\n")
+            elif split_item[1] == "4":
+                TXT_file_check.write(f"File Name - {split_item[4]}\n")
+            elif split_item[1] == "5":
+                TXT_file_check.write(f"Process - {split_item[4]}\n")
+            elif split_item[1] == "6":
+                TXT_file_check.write(f"RegEx - {split_item[4]}\n")
 
     for process_items in tree.iter('{http://www.w3.org/2000/09/xmldsig#}process'):
         for item in process_items:
-            # removing the piped flags up front
+            # removing the piped flags up front and back
             str_item = str(item.text)
-            split_item = str_item[5:]
-            exclusion_list.append(split_item)
+            split_item = str_item.split("|")
+            # check if all items were found, otherwise skip item
+            if len(split_item) != 4:
+                continue
+     
+            # add to list
+            exclusion_list.append(split_item[3])
             
             # write to file
-            TXT_file.write(f"{split_item}\n")
+            TXT_file_copy.write(f"{split_item[3]}\n")
+
+            # write to file with exclusion type for checking
+            if split_item[4] == "1":
+                TXT_file_check.write(f"Scan - {split_item[3]}\n")
+            elif split_item[4] == "2":
+                TXT_file_check.write(f"File - {split_item[3]}\n")
+            elif split_item[4] == "3":
+                TXT_file_check.write(f"Self-Protect - {split_item[3]}\n")
+            elif split_item[4] == "4":
+                TXT_file_check.write(f"File Name - {split_item[3]}\n")
+            elif split_item[4] == "5":
+                TXT_file_check.write(f"Process - {split_item[3]}\n")
+            elif split_item[4] == "6":
+                TXT_file_check.write(f"RegEx - {split_item[3]}\n")
+            
+            # write to file
+            TXT_file_check.write(f"{spit_item_backstripped} \n")
     
     return exclusion_list
 
@@ -162,12 +205,18 @@ if __name__ == "__main__":
     XML_file_name = input("Please provide the policy XML containing the custom exclusions you would like to parse (e.g. ios_Audit_e1241826-0d35-4231-b521-28432f437950.xml): ")
     if XML_file_name != "":
         exclusion_list = XML_parser(XML_file_name)
-        if exclusion_list != 0:
-            log("\nExclusions parsed, please copy paste items below into **Add Multiple Exclusions** pane in AMP GUI:\n")
-            log(f"A **exclusions/{XML_file_name}.txt** file is also created for you with the same content.\n")
-            time.sleep(2)
+        if len(exclusion_list) == 0:
+            log(f"\nNo exclusions parsed, please check {XML_file_name} policy file...\n")
+        else:
+            log("\nExclusions parsed:\n")
+            time.sleep(1)
             for exclusion in exclusion_list:
                 log(exclusion)
+            time.sleep(1)
+            log(f"\nA **exclusions/{XML_file_name}_for_copying.txt** file is also created for you with the same content.\n")
+            log("Please copy paste those items from txt file into **Add Multiple Exclusions** pane in AMP GUI\n")
+            log(f"A **exclusions/{XML_file_name}_for_checking.txt** file is also created for you containing the Exclusion Type to double check your copied entries.\n")
+
     else:
         log("No policy selected...")
 

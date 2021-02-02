@@ -47,7 +47,7 @@ python AMP_exclusion_management.py
 
 7. Enter the name of the XML file you would like to parse for exclusions (e.g. `ios_Audit_e1241826-0d35-4231-b521-28432f437950.xml`). 
 
-8. Copy the parsed exclusions from the CLI or from the created directory `exclusions` with a TXT file.
+8. Copy the parsed exclusions from the TXT file in the newly created directory `exclusions` (e.g. `ios_Audit_e1241826-0d35-4231-b521-28432f437950_for_copying.txt`). There is also another file with a similar name (e.g. `ios_Audit_e1241826-0d35-4231-b521-28432f437950_for_checking.txt`) which is prepended with the **Exclusion Type**. This is meant to double check after the first time you have copied your exclusions.
 
 9. Go to your AMP tenant that you wish to migrate exclusions into. Go to an existing **custom exclusion set** or create a new one. Click on **Add Multiple Exclusions...** and paste the copied exclusions. They should be auto-detected as the exclusion type (**please check this the first time you are migrating exclusions to a tenant**). Please check out the [AMP for Endpoints User Guide](https://docs.amp.cisco.com/en/A4E/AMP%20for%20Endpoints%20User%20Guide.pdf) for more information.
 
