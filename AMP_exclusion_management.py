@@ -170,17 +170,19 @@ def XML_parser(XML_file_name):
 
             # write to file with exclusion type for checking
             if split_item[4] == "1":
-                TXT_file_check.write(f"Scan - {split_item[3]}\n")
+                TXT_file_check.write(f"Scan Child Processes - {split_item[3]}\n")
             elif split_item[4] == "2":
-                TXT_file_check.write(f"File - {split_item[3]}\n")
-            elif split_item[4] == "3":
-                TXT_file_check.write(f"Self-Protect - {split_item[3]}\n")
+                TXT_file_check.write(f"Written Files - {split_item[3]}\n")
             elif split_item[4] == "4":
-                TXT_file_check.write(f"File Name - {split_item[3]}\n")
-            elif split_item[4] == "5":
-                TXT_file_check.write(f"Process - {split_item[3]}\n")
-            elif split_item[4] == "6":
-                TXT_file_check.write(f"RegEx - {split_item[3]}\n")
+                TXT_file_check.write(f"Self-Protect Engine - {split_item[3]}\n")
+            elif split_item[4] == "8":
+                TXT_file_check.write(f"Child Process - {split_item[3]}\n")
+            elif split_item[4] == "32":
+                TXT_file_check.write(f"Heuristic - {split_item[3]}\n")
+            elif split_item[4] == "64":
+                TXT_file_check.write(f"SFP Rules - {split_item[3]}\n")
+            elif split_item[4] == "128":
+                TXT_file_check.write(f"SFP Rules Child Process- {split_item[3]}\n")
             
             # write to file
             TXT_file_check.write(f"{spit_item_backstripped} \n")
