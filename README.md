@@ -35,7 +35,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Open up the `creds.json` file and add Secure Endpoint (AMP4E) API credentials. Optionally change the AMP host URL to `.eu.` or `.apjc.` if you are not using the US AMP cloud. Don't forget to save the file.
+4. Open up the `creds.json` file and add Secure Endpoint (AMP4E) API credentials. Optionally change the AMP host URL to `.eu.` or `.apjc.` if you are not using the US AMP cloud. Don't forget to save the file. You can retrieve these AMP keys in your AMP4E Dashboard under **Accounts > API keys**. If you don't have an account you can test with dCloud (e.g. **https://amp.dcloud.cisco.com/users/login** `devnetexpress@cisco.comand` `C1sco12345`).
 
 5. Execute the python `AMP_exclusion_management.py` file in your venv:
 
