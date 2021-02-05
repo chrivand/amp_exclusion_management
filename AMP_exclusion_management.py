@@ -159,7 +159,7 @@ def XML_parser(XML_file_name):
             str_item = str(item.text)
             split_item = str_item.split("|")
             # check if all items were found, otherwise skip item
-            if len(split_item) != 4:
+            if len(split_item) != 6:
                 continue
      
             # add to list
@@ -170,23 +170,22 @@ def XML_parser(XML_file_name):
 
             # write to file with exclusion type for checking
             if split_item[4] == "1":
-                TXT_file_check.write(f"Scan Child Processes - {split_item[3]}\n")
+                TXT_file_check.write(f"PROCESS Scan Child - {split_item[3]}\n")
             elif split_item[4] == "2":
-                TXT_file_check.write(f"Written Files - {split_item[3]}\n")
+                TXT_file_check.write(f"PROCESS Written Files - {split_item[3]}\n")
             elif split_item[4] == "4":
-                TXT_file_check.write(f"Self-Protect Engine - {split_item[3]}\n")
+                TXT_file_check.write(f"PROCESS Self-Protect Engine - {split_item[3]}\n")
             elif split_item[4] == "8":
-                TXT_file_check.write(f"Child Process - {split_item[3]}\n")
+                TXT_file_check.write(f"PROCESS Child - {split_item[3]}\n")
             elif split_item[4] == "32":
-                TXT_file_check.write(f"Heuristic - {split_item[3]}\n")
+                TXT_file_check.write(f"PROCESS Heuristic - {split_item[3]}\n")
             elif split_item[4] == "64":
-                TXT_file_check.write(f"SFP Rules - {split_item[3]}\n")
+                TXT_file_check.write(f"PROCESS SFP Rules - {split_item[3]}\n")
             elif split_item[4] == "128":
-                TXT_file_check.write(f"SFP Rules Child Process- {split_item[3]}\n")
-            
-            # write to file
-            TXT_file_check.write(f"{spit_item_backstripped} \n")
-    
+                TXT_file_check.write(f"PROCESS SFP Rules Child - {split_item[3]}\n")
+            else:
+                TXT_file_check.write(f"PROCESS - {split_item[3]}\n")
+                
     return exclusion_list
 
 
